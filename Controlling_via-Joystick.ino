@@ -18,7 +18,7 @@ int servoarmpin = 5, servoelbowpin = 6, servobasepin = 7, servoclawpin = 8;
 
 // Servo position variables
 int servoarmpos = 0, servoelbowpos = 0, servobasepos = 0, servoclawpos = 0;
-int servoarm_meanpos = 90, servoelbow_meanpos = 0, servobase_meanpos = 90, servoclaw_meanpos = 90;
+int servoarm_meanpos = 90, servoelbow_meanpos = 0, servobase_meanpos = 90, servoclaw_meanpos = 0;
 
 // LED indicator pins
 int yellowpin = 10, greenpin = 11;
@@ -134,6 +134,18 @@ void move() {
   digitalWrite(yellowpin, LOW);
   bool moved = false;
 
+  if (Vrx < 400 && servobasepos < 180) {    //base
+      servobasepos += anglespeed;
+      servobase.write(servobasepos);
+      delay(speed);
+      moved = true;
+    } else if (Vrx > 600 && servobasepos > 0) { 
+      servobasepos -= anglespeed;
+      servobase.write(servobasepos);
+      delay(speed);
+      moved = true;
+    }
+
   if (state == 0) {  // Elbow
     if (Vry > 600 && servoelbowpos > 0) {
       servoelbowpos -= anglespeed;
@@ -160,15 +172,15 @@ void move() {
       moved = true;
     }
   } 
-  else if (state == 2) {  // Base
-    if (Vrx > 600 && servobasepos < 180) {
-      servobasepos += anglespeed;
-      servobase.write(servobasepos);
+  else if (state == 2) {  // Claw
+    if (Vry <400 && servoclawpos < 180) {
+      servoclawpos += anglespeed;
+      servoclaw.write(servoclawpos);
       delay(speed);
       moved = true;
-    } else if (Vrx < 400 && servobasepos > 0) {
-      servobasepos -= anglespeed;
-      servobase.write(servobasepos);
+    } else if (Vry > 600 && servoclawpos > 0) {
+      servoclawpos -= anglespeed;
+      servoclaw.write(servoclawpos);
       delay(speed);
       moved = true;
     }
