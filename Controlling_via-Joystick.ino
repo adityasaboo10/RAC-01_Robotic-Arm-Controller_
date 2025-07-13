@@ -14,14 +14,14 @@ int Vrx, Vry, Sw = 0;
 int Vrxpin = A0, Vrypin = A1, Swpin = 2;
 
 // Servo motor pins
-int servoarmpin = 5, servoelbowpin = 6, servobasepin = 7, servoclawpin = 8;
+int servoarmpin = 7, servoelbowpin = 6, servobasepin = 5, servoclawpin = 8;
 
 // Servo position variables
 int servoarmpos = 0, servoelbowpos = 0, servobasepos = 0, servoclawpos = 0;
 int servoarm_meanpos = 90, servoelbow_meanpos = 0, servobase_meanpos = 90, servoclaw_meanpos = 0;
 
 // LED indicator pins
-int yellowpin = 10, greenpin = 11;
+int led1=9, led2=10, led3=11, led4=12;   
 
 // Speed settings
 int speed = 15;        // Delay between movements
@@ -60,9 +60,7 @@ void read() {
 // Reset servo to mean position
 // ----------------------------
 void reset(Servo &servo, int &currentPos, int targetPos, int stepDelay) {
-  digitalWrite(yellowpin, HIGH);
-  digitalWrite(greenpin, LOW);
-
+ blink();
   if (currentPos == targetPos) return;
 
   int step = (targetPos > currentPos) ? 1 : -1;
@@ -104,7 +102,7 @@ void switcher() {
     pressDuration = currentTime - pressStartTime;          //duration of the click stores at the moment of just release
 
     if (pressDuration > 800) {                    
-      state = 3;  // Long press → reset
+      state = 4;  // Long press → reset
     } else {            
       clickCount++;
       lastClickTime = currentTime;        //the time at which button was just released ie one click is recorded
@@ -114,9 +112,17 @@ void switcher() {
   // Determine click pattern (single/double)
   if (!isPressed && clickCount > 0 && (currentTime - lastClickTime > 300)) {
     if (clickCount == 1) {
-      state = (state == 0) ? 1 : 0;  // Toggle elbow ↔ arm
-    } else if (clickCount == 2) {
-      state = 2;  // Base control
+  if (state == 0) {
+    state = 1;
+  } else {
+    state = 0;  // Force it back to 0 from any other state
+  }
+}
+ else if (clickCount == 2) {
+      state = 2;  // claw control
+    }
+    else if (clickCount == 3 ){
+      state=3; //base control
     }
     clickCount = 0;
   }
@@ -130,9 +136,13 @@ void switcher() {
 // Move servos based on current state
 // ----------------------------
 void move() {
-  digitalWrite(greenpin, HIGH);
-  digitalWrite(yellowpin, LOW);
+ 
   bool moved = false;
+if (state == 3){
+  digitalWrite(led1,HIGH);
+  digitalWrite(led2,HIGH);
+  digitalWrite(led3,HIGH);
+  digitalWrite(led4,HIGH);
 
   if (Vrx < 400 && servobasepos < 180) {    //base
       servobasepos += anglespeed;
@@ -145,8 +155,13 @@ void move() {
       delay(speed);
       moved = true;
     }
-
+}
   if (state == 0) {  // Elbow
+  digitalWrite(led1,HIGH);
+  digitalWrite(led2,LOW);
+  digitalWrite(led3,LOW);
+  digitalWrite(led4,LOW);
+  
     if (Vry > 600 && servoelbowpos > 0) {
       servoelbowpos -= anglespeed;
       servoelbow.write(servoelbowpos);
@@ -160,6 +175,11 @@ void move() {
     }
   } 
   else if (state == 1) {  // Arm
+  digitalWrite(led1,HIGH);
+  digitalWrite(led2,HIGH);
+  digitalWrite(led3,LOW);
+  digitalWrite(led4,LOW);
+  
     if (Vry > 600 && servoarmpos < 180) {
       servoarmpos += anglespeed;
       servoarm.write(servoarmpos);
@@ -173,6 +193,10 @@ void move() {
     }
   } 
   else if (state == 2) {  // Claw
+  digitalWrite(led1,HIGH);
+  digitalWrite(led2,HIGH);
+  digitalWrite(led3,HIGH);
+  digitalWrite(led4,LOW);
     if (Vry <400 && servoclawpos < 180) {
       servoclawpos += anglespeed;
       servoclaw.write(servoclawpos);
@@ -185,7 +209,7 @@ void move() {
       moved = true;
     }
   } 
-  else if (state == 3) {  // Reset
+  else if (state == 4) {  // Reset
     reset(servobase, servobasepos, servobase_meanpos, speed);
     reset(servoelbow, servoelbowpos, servoelbow_meanpos, speed);
     reset(servoarm, servoarmpos, servoarm_meanpos, speed);
@@ -201,6 +225,19 @@ void move() {
     servoclaw.write(servoclawpos);
   }
 }
+void blink(){
+  for(int l=0; l<2; l++){
+  digitalWrite(led1,HIGH);
+  digitalWrite(led2,HIGH);
+  digitalWrite(led3,HIGH);
+  digitalWrite(led4,HIGH);
+  delay(10);     
+   digitalWrite(led1,LOW);
+  digitalWrite(led2,LOW);
+  digitalWrite(led3,LOW);
+  digitalWrite(led4,LOW);           
+  }
+}
 
 // ----------------------------
 // Arduino setup
@@ -213,8 +250,10 @@ void setup() {
   pinMode(Vrypin, INPUT);
   pinMode(Swpin, INPUT_PULLUP);
   pinMode(rstpin, INPUT);
-  pinMode(yellowpin, OUTPUT);
-  pinMode(greenpin, OUTPUT);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
 
   // Attach servos
   servobase.attach(servobasepin);
@@ -224,9 +263,8 @@ void setup() {
 
   // Startup status
   Serial.print("Initializing RAC");
-  digitalWrite(greenpin, HIGH);
-  digitalWrite(yellowpin, LOW);
-
+  //blink to indicate
+ blink();
   // Move to neutral positions
   servobase.write(servobase_meanpos);
   servoelbow.write(servoelbow_meanpos);
@@ -235,6 +273,8 @@ void setup() {
   delay(1000);
 
   Serial.println("Initialization Complete");
+
+
 
   // Initialize current positions
   servobasepos = servobase_meanpos;
