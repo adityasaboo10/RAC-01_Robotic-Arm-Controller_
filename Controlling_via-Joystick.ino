@@ -18,7 +18,7 @@ int servoarmpin = 7, servoelbowpin = 6, servobasepin = 5, servoclawpin = 8;
 
 // Servo position variables
 int servoarmpos = 0, servoelbowpos = 0, servobasepos = 0, servoclawpos = 0;
-int servoarm_meanpos = 90, servoelbow_meanpos = 0, servobase_meanpos = 90, servoclaw_meanpos = 0;
+int servoarm_meanpos = 180, servoelbow_meanpos = 50, servobase_meanpos = 90, servoclaw_meanpos = 0;
 
 // LED indicator pins
 int led1=9, led2=10, led3=11, led4=12;   
@@ -211,8 +211,8 @@ if (state == 3){
   } 
   else if (state == 4) {  // Reset
     reset(servobase, servobasepos, servobase_meanpos, speed);
-    reset(servoelbow, servoelbowpos, servoelbow_meanpos, speed);
     reset(servoarm, servoarmpos, servoarm_meanpos, speed);
+    reset(servoelbow, servoelbowpos, servoelbow_meanpos, speed);
     reset(servoclaw, servoclawpos, servoclaw_meanpos, speed);
     moved=true;
   }
@@ -289,5 +289,5 @@ void setup() {
 void loop() {
   read();        // Read joystick and button
   switcher();    // Handle click logic
-  move();        // Move based on current state
-}
+  move();    
+  }    // Move based on current state
