@@ -37,9 +37,6 @@ int clickCount = 0;
 bool isPressed = false;
 bool wasPressed = false;
 
-// Reset button pin
-int rstpin = 3;
-
 // Servo objects
 Servo servobase, servoelbow, servoarm, servoclaw;
 
