@@ -246,7 +246,6 @@ void setup() {
   pinMode(Vrxpin, INPUT);
   pinMode(Vrypin, INPUT);
   pinMode(Swpin, INPUT_PULLUP);
-  pinMode(rstpin, INPUT);
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
   pinMode(led3, OUTPUT);
