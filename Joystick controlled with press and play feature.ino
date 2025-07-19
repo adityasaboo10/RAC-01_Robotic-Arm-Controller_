@@ -41,7 +41,8 @@ bool wasPressed = false;
 int rstpin = 3;
 
 //Press and play pins
-const int pp_recordButtonPin;
+const int pp_recordButtonPin = 4;
+bool pp_recordingStarted = false;
 
 // Servo objects
 Servo servobase, servoelbow, servoarm, servoclaw;
@@ -74,7 +75,16 @@ void checkRecordingButton() {
 
     if (pressDuration >= LONG_PRESS_DURATION) {
       pp_playbackMode = true;  // Long press → Play
+      pp_recordingStarted = false; // Mark that playback just happened
     } else {
+       // Short press to record
+      if (!pp_recordingStarted) {
+        // First record after playback → clear previous
+        pp_positionCount = 0;
+        Serial.println("Starting new recording...");
+        pp_recordingStarted = true;
+      }
+
       if (pp_positionCount < MAX_POSITIONS) {
         positions[pp_positionCount++] = {servobasepos, servoelbowpos, servoarmpos, servoclawpos};
         Serial.print("Recorded Position ");
@@ -94,7 +104,6 @@ void playback() {
     reset(servoclaw, servoclawpos, positions[i].claw, speed);
   }
   pp_playbackMode = false;
-  pp_positionCount = 0;
 }
 
 // ----------------------------
@@ -221,7 +230,7 @@ void move() {
       servoelbow.write(servoelbowpos);
       delay(speed);
       moved = true;
-    } else if (Vry < 400 && servoelbowpos < 180) {
+    } else if (Vry < 400 && servoelbowpos < 180 ) {
       servoelbowpos += anglespeed;
       servoelbow.write(servoelbowpos);
       delay(speed);
@@ -248,13 +257,13 @@ void move() {
     digitalWrite(led1, HIGH);
     digitalWrite(led2, HIGH);
     digitalWrite(led3, HIGH);
-    digitalWrite(led4, LOW);
-    if (Vry > 600 && servoclawpos > 0) {
+    digitalWrite(led4, LOW); 
+    if (Vry > 600 && servoclawpos < 180) {
       servoclawpos += anglespeed;
       servoclaw.write(servoclawpos);
       delay(speed);
       moved = true;
-    } else if (Vry < 400 && servoclawpos < 180) {
+    } else if (Vry < 400 && servoclawpos > 0) {
       servoclawpos -= anglespeed;
       servoclaw.write(servoclawpos);
       delay(speed);
@@ -345,4 +354,6 @@ void loop() {
   if (pp_playbackMode) {
     playback();
   }
+  Serial.println(servoelbowpos);
+  Serial.println(servoclawpos);
 }
