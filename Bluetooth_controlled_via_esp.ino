@@ -29,7 +29,7 @@ int speed = 15;        // Delay between movements
 int anglespeed = 5;    // Step size for angle increment/decrement
 
 // State variable
-int state = 0;         // 0:elbow, 1:arm, 2:base, 3:reset
+int state = 0;         // 0:elbow, 1:arm, 2:claw, 3:base, 4:reset
 
 // Button click tracking
 unsigned long lastClickTime = 0;
