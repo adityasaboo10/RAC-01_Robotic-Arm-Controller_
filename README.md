@@ -18,10 +18,10 @@ Below is a list of components and materials used in the RAC (till now):
 - **MG90 Servo Motors** (x4) – For movement
 - **18650 batteries** – For powering the bot
 - **HW107-Charging module** - For charging 18650 battery (one at a time) 
-- **Jumper Wires**, **Breadboard**, **perfboard**, **18650 holder 2S**
+- **Jumper Wires**, **Breadboard**, **perfboard**, **18650 holder 2S**, **soldering iron**,**soldering wire**
 
 ###  Mechanical / Printed Parts
-- **3D Printed parts** – The base, arm, claw
+- **3D Printed parts** – The base, arm, claw, cap
 -  **General-purpose fasteners** – Screws, bolts, rubber bands, double-sided tape, etc.
 
  ### Materials
