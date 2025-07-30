@@ -13,11 +13,12 @@ This project was developed as a solution to the problem statement for the Arduin
 
 Below is a list of components and materials used in the RAC (till now):
 ###  Electronics
-- **Arduino Uno**– For testing purposes
-- **Esp32-38pins**-The main controller
+- **Arduino Uno**– For Joystick / Press and play modes
+- **Esp32-38pins**-For bluetooth mode
 - **MG90 Servo Motors** (x4) – For movement
-- **1.5V Battery(x4)** – For powering the bot
-- **Jumper Wires**, **Breadboard**
+- **18650 batteries** – For powering the bot
+- **HW107-Charging module** - For charging 18650 battery (one at a time) 
+- **Jumper Wires**, **Breadboard**, **perfboard**, **18650 holder 2S**
 
 ###  Mechanical / Printed Parts
 - **3D Printed parts** – The base, arm, claw
