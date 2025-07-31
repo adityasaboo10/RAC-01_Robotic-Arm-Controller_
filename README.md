@@ -13,7 +13,8 @@ This project was developed as a solution to the problem statement for the Arduin
 
 Below is a list of components and materials used in the RAC (till now):
 ###  Electronics
-- **Arduino Uno**– For Joystick / Press and play modes
+- **Arduino Uno**– For Joystick / Press and play / Bluetooth modes
+- **HC-05** - Bluetooth sensor 
 - **Esp32-38pins**-For bluetooth mode
 - **MG90 Servo Motors** (x4) – For movement
 - **18650 batteries** – For powering the bot
