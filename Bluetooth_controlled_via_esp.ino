@@ -3,8 +3,9 @@
 // Modes: 
 //   0 → Elbow Control    (Single click-toggle to get elbow control from arm)
 //   1 → Arm Control     (Vice-versa as above)
-//   2 → Base Control (Double Click)
-//   3 → Reset Position (Long Press)
+//   2 → Claw Control (Double Click)
+//   3 → Base Control (Triple Click)
+//   4 → Reset Position (Long Press)
 // ----------------------------
 
 #include <ESP32Servo.h>
