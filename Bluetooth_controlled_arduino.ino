@@ -22,6 +22,8 @@ int up, down, right, left, X;
 // Servo motor pins
 int servoarmpin = 6, servoelbowpin = 7, servobasepin = 5, servoclawpin = 8;
 
+//joystick pin = 13, press play pin =12
+
 // Servo position variables
 int servoarmpos = 0, servoelbowpos = 0, servobasepos = 0, servoclawpos = 0;
 int servoarm_meanpos = 180, servoelbow_meanpos = 50, servobase_meanpos = 90, servoclaw_meanpos = 0;
