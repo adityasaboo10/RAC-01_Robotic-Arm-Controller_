@@ -20,7 +20,7 @@ SoftwareSerial Bluetooth(10, 11);  // RX, TX
 int up, down, right, left, X;
 
 // Servo motor pins
-int servoarmpin = 7, servoelbowpin = 6, servobasepin = 5, servoclawpin = 8;
+int servoarmpin = 6, servoelbowpin = 7, servobasepin = 5, servoclawpin = 8;
 
 // Servo position variables
 int servoarmpos = 0, servoelbowpos = 0, servobasepos = 0, servoclawpos = 0;
