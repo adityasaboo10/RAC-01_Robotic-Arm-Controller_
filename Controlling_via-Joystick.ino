@@ -11,17 +11,17 @@
 
 // Analog joystick input
 int Vrx, Vry, Sw = 0;
-int Vrxpin = A0, Vrypin = A1, Swpin = 2;
+int Vrxpin = A0, Vrypin = A1, Swpin = 13;
 
 // Servo motor pins
-int servoarmpin = 7, servoelbowpin = 6, servobasepin = 5, servoclawpin = 8;
+int servoarmpin = 6, servoelbowpin = 7, servobasepin = 5, servoclawpin = 8;
 
 // Servo position variables
 int servoarmpos = 0, servoelbowpos = 0, servobasepos = 0, servoclawpos = 0;
 int servoarm_meanpos = 180, servoelbow_meanpos = 50, servobase_meanpos = 90, servoclaw_meanpos = 0;
 
 // LED indicator pins
-int led1=9, led2=10, led3=11, led4=12;   
+int led1 = 4, led2 = 3, led3 = 2, led4 = 9;   
 
 // Speed settings
 int speed = 15;        // Delay between movements
