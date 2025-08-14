@@ -29,7 +29,7 @@ int servoarmpos = 0, servoelbowpos = 0, servobasepos = 0, servoclawpos = 0;
 int servoarm_meanpos = 180, servoelbow_meanpos = 50, servobase_meanpos = 90, servoclaw_meanpos = 0;
 
 // LED indicator pins
-int led1 = 2, led2 = 3, led3 = 4, led4 = 9;
+int led1 = 4, led2 = 3, led3 = 2, led4 = 9;
 
 
 // Speed settings
