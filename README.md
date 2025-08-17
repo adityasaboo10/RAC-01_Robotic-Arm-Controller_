@@ -88,7 +88,9 @@ These are meant for Bluetooth-only control. **Servos do not work yet** due to ES
 ---
 
 ## Gallery
-Coming soon: images of CAD design, wiring setup, 3D-printed assembly, and in-use demo.
+## 🎥 Project Demo
+[![Watch on YouTube](https://img.youtube.com/vi/XiNYWbxc35A/0.jpg)](https://youtu.be/XiNYWbxc35A)
+
 
 ---
 
