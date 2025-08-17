@@ -89,7 +89,7 @@ These are meant for Bluetooth-only control. **Servos do not work yet** due to ES
 
 ## Gallery
 ## 🎥 Project Demo
-[![Watch on YouTube](https://img.youtube.com/vi/XiNYWbxc35A/0.jpg)](https://youtu.be/XiNYWbxc35A)
+[![YouTube](https://img.shields.io/badge/Watch%20on-YouTube-red?logo=youtube&logoColor=white)](https://youtu.be/XiNYWbxc35A)
 
 
 ---
