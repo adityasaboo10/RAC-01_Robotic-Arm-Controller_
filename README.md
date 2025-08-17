@@ -38,7 +38,7 @@ This project was developed as a solution to the problem statement for the Arduin
 ---
 
 ## Setup
-[`RAC_schematic_pcb.epro`](RAC_schematic_pcb.epro)
+** EASYEDA circuit **-[`RAC_schematic_pcb.epro`](RAC_schematic_pcb.epro)
 
 ---
 
