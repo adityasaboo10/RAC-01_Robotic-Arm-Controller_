@@ -37,7 +37,7 @@ This project was developed as a solution to the problem statement for the Arduin
 ---
 
 ## Setup
-Coming soon. Will include wiring diagrams, mode switching logic, and power flow.
+[`RAC_schematic_pcb.epro`](RAC_schematic_pcb.epro)
 
 ---
 
