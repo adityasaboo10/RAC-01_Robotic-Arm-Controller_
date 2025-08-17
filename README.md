@@ -24,6 +24,7 @@ This project was developed as a solution to the problem statement for the Arduin
 - **ESP32 (38-pin)** – Used for Bluetooth version (see compatibility notes below)
 - **MG90 Servo Motors** (x4) – Actuate base, arm, elbow, and claw
 - **18650 Batteries** – Power source for servos
+- **MINI560** – Buck Converter
 - **HW-107 Charging Module** – Charges one 18650 battery at a time
 - **Other** – Jumper wires, breadboard, perfboard, 18650 2S holder, soldering iron, solder wire
 
